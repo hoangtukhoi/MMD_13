@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # 1. Duong dan vao file Meta (Doi ten 'Gift_Cards' thanh danh muc ban muon)
-meta_file_path = r"F:\amazon_data\meta_Home_and_Kitchen.jsonl"
-output_meta_csv = r"F:\amazon_data\meta_Home_and_Kitchen.csv"
+meta_file_path = r"F:\amazon_data\data\json\meta_Home_and_Kitchen.jsonl"
+output_meta_csv = r"F:\amazon_data\data\csv\meta_Home_and_Kitchen.csv"
 
 # Giam chunk_size xuong vi file meta chua nhieu text dai, de bi tran RAM
 chunk_size = 20000 
@@ -19,17 +19,19 @@ print(f"Bat dau doc file Meta: {meta_file_path}")
 cols_to_keep = ['parent_asin', 'title', 'price', 'images']
 
 # 2. Vong lap doc tung chunk
+first_chunk = True
 for i, chunk in enumerate(pd.read_json(meta_file_path, lines=True, chunksize=chunk_size)):
     print(f"-> Dang xu ly chunk thu {i + 1}...")
     
-    # Meo nho: Chi chon nhung cot thuc su ton tai trong chunk nay 
-    # (De phong truong hop co chunk bi thieu du lieu khong bi vang loi KeyError)
-    existing_cols = [col for col in cols_to_keep if col in chunk.columns]
-    chunk = chunk[existing_cols]
-    
-    write_header = True if i == 0 else False
+    # Ensure all target columns exist, filling missing with NaN
+    for col in cols_to_keep:
+        if col not in chunk.columns:
+            chunk[col] = pd.NA
+            
+    chunk = chunk[cols_to_keep]
     
     # Ghi noi tiep xuong file CSV
-    chunk.to_csv(output_meta_csv, mode='a', header=write_header, index=False)
+    chunk.to_csv(output_meta_csv, mode='a', header=first_chunk, index=False)
+    first_chunk = False
 
 print(f"\nHOAN THANH! Du lieu san pham da luu tai: {output_meta_csv}")

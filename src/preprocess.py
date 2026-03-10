@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # 1. Duong dan file
-review_file_path = r"F:\amazon_data\review_Home_and_Kitchen.jsonl"
-output_csv_path = r"F:\amazon_data\Home_and_Kitchen_review.csv"
+review_file_path = r"F:\amazon_data\data\json\review_Home_and_Kitchen.jsonl"
+output_csv_path = r"F:\amazon_data\data\csv\Home_and_Kitchen_review.csv"
 chunk_size = 100000 
 
 # Xoa file csv cu neu da ton tai de tranh bi loi ghi noi tiep vao du lieu cu

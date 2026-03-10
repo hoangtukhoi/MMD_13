@@ -9,18 +9,7 @@ if not os.path.exists(SAVE_DIR):
     os.makedirs(SAVE_DIR)
 
 # 2. Danh sach 33 danh muc cua Amazon Reviews 2023
-CATEGORIES = [
-    "All_Beauty", "Amazon_Fashion", "Appliances", "Arts_Crafts_and_Sewing", 
-    "Automotive", "Baby_Products", "Beauty_and_Personal_Care", "Books", 
-    "CDs_and_Vinyl", "Cell_Phones_and_Accessories", "Clothing_Shoes_and_Jewelry", 
-    "Collectible_Coins", "Digital_Music", "Electronics", "Fine_Art", 
-    "Gift_Cards", "Grocery_and_Gourmet_Food", "Handmade_Products", 
-    "Health_and_Household", "Home_and_Kitchen", "Industrial_and_Scientific", 
-    "Kindle_Store", "Magazine_Subscriptions", "Movies_and_TV", "Musical_Instruments", 
-    "Office_Products", "Patio_Lawn_and_Garden", "Pet_Supplies", "Software", 
-    "Sports_and_Outdoors", "Tools_and_Home_Improvement", "Toys_and_Games", "Video_Games"
-]
-
+CATEGORIES = [ "Home_and_Kitchen"]
 def download_file(url, save_path):
     """Ham tai file voi che do streaming de khong ton RAM"""
     if os.path.exists(save_path):
